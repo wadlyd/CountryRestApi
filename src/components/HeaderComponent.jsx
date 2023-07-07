@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
@@ -25,17 +24,28 @@ const HeaderComponent = () => {
           <div>
           
           <Button onClick={() => handleClick()} color="inherit">
-            <DarkModeIcon 
-              sx={{ 
-                fontSize: 20,
-                mr: 2,
-              }}
-            />
-              {isDarkMode === "dark-theme"?
-                <span>Dark Mode</span>
+            {isDarkMode === "dark-theme"?
+              <>
+                <DarkModeIcon
+                  sx={{
+                    color: "hsl(0, 0%, 100%)",
+                    fontSize: 20,
+                    mr: 1,
+                    }} 
+                  />
+                  <span>Dark Mode</span>
+              </>
                 :
+              <>
+                <DarkModeIcon
+                  sx={{
+                    fontSize: 20,
+                    mr: 1,
+                  }} 
+                />
                 <span>Light Mode</span>
-              }
+              </>
+            }
               
           </Button>
         </div>
