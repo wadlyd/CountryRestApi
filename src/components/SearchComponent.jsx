@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const SearchInputComponent = ({ onSearch }) => {
+const SearchInputComponent = ({ onSearch,  }) => {
   const [input, setInput] = useState("");
 
   const submitHandler = (e) => {

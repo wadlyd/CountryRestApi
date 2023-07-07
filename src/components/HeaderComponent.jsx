@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -7,25 +7,16 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 const HeaderComponent = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
 
-  function handleClick(){
-    setIsDarkMode(!isDarkMode)
+  const handleClick = () => {
+    isDarkMode === "dark-theme" ? setIsDarkMode("light-theme") : setIsDarkMode("dark-theme");
   }
   
+  useEffect(() => {
+    document.body.className = isDarkMode;
+  })
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar
-      sx={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        backgroundColor: isDarkMode ? "hsl(207, 26%, 17%)" : "rgba(255, 255, 255, 0.87)",
-        color: isDarkMode? "rgba(255, 255, 255, 0.87)" : "#000000",
-        position: "fixed",
-        pl: 10,
-        pt: 3,
-        pr: 8,
-        pb: 3,
-      }}>
+      <Box className="header">
         <div>
           <h3>
             Where in the world?
@@ -33,17 +24,22 @@ const HeaderComponent = () => {
           </div>
           <div>
           
-          <Button onClick={handleClick} color="inherit">
+          <Button onClick={() => handleClick()} color="inherit">
             <DarkModeIcon 
               sx={{ 
                 fontSize: 20,
                 mr: 2,
               }}
-            /> 
-            <span>Dark Mode</span>
+            />
+              {isDarkMode === "dark-theme"?
+                <span>Dark Mode</span>
+                :
+                <span>Light Mode</span>
+              }
+              
           </Button>
         </div>
-      </AppBar>
+      </Box>
     </Box>
   );
 }

@@ -7,6 +7,9 @@ import FilterCountryComponent from "./FilterComponent";
 import HeaderComponent from "./HeaderComponent";
 
 const CountriesList = () => {
+
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  
   const [countries, setCountries] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
@@ -69,7 +72,7 @@ const CountriesList = () => {
   return (
     <>
         <div className="wrapper">
-          <HeaderComponent />
+          <HeaderComponent isDarkMode />
 
           <div className="head">
             <div className="search">
