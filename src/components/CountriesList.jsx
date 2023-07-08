@@ -4,11 +4,8 @@ import { apiURL } from '../services/api';
 import { Link } from "react-router-dom";
 import SearchInputComponent from "./SearchComponent";
 import FilterCountryComponent from "./FilterComponent";
-import HeaderComponent from "./HeaderComponent";
 
 const CountriesList = () => {
-
-  const [isDarkMode, setIsDarkMode] = useState(true);
   
   const [countries, setCountries] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -72,44 +69,44 @@ const CountriesList = () => {
   return (
     <>
         <div className="wrapper">
-          <HeaderComponent isDarkMode />
+          <div className="wrapper-container">
+            <div className="head">
+              <div className="search">
+                <SearchInputComponent onSearch={getCountryByName} />
+              </div>
 
-          <div className="head">
-            <div className="search">
-              <SearchInputComponent onSearch={getCountryByName} />
+              <div className="filter">
+                <FilterCountryComponent onSelect={getCountryByRegion} />
+              </div>
             </div>
 
-            <div className="filter">
-              <FilterCountryComponent onSelect={getCountryByRegion} />
+            <div className="countriesList">
+              {isLoading && !error && <h4>Loading........</h4>}
+              {error && !isLoading && <h4>{error}</h4>}
+
+              {countries?.map((country) => (
+                <Link to={`/country/${country.name.common}`}>
+                  <div className="card">
+                    <div className="imgFlag">
+                      <img src={country.flags.png} alt="" />
+                    </div>
+
+                    <div className="countryInfo">
+                      <h5>{country.name.common}</h5>
+                      <h6>
+                        {" "}
+                        Population:{" "}
+                          <span>
+                            {new Intl.NumberFormat().format(country.population)}
+                          </span>
+                      </h6>
+                      <h6> Region: <span>{country.region}</span></h6>
+                      <h6>Capital: <span>{country.capital}</span></h6>
+                    </div>
+                  </div>
+                </Link>
+              ))}
             </div>
-          </div>
-
-          <div className="countriesList">
-            {isLoading && !error && <h4>Loading........</h4>}
-            {error && !isLoading && <h4>{error}</h4>}
-
-            {countries?.map((country) => (
-              <Link to={`/country/${country.name.common}`}>
-                <div className="card">
-                  <div className="imgFlag">
-                    <img src={country.flags.png} alt="" />
-                  </div>
-
-                  <div className="countryInfo">
-                    <h5>{country.name.common}</h5>
-                    <h6>
-                      {" "}
-                      Population:{" "}
-                        <span>
-                          {new Intl.NumberFormat().format(country.population)}
-                        </span>
-                    </h6>
-                    <h6> Region: <span>{country.region}</span></h6>
-                    <h6>Capital: <span>{country.capital}</span></h6>
-                  </div>
-                </div>
-              </Link>
-            ))}
           </div>
         </div>
     

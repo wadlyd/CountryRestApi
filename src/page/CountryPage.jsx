@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { apiURL } from "../services/api";
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
 const CountryPageInfo = () => {
   const [country, setCountry] = useState([]);
@@ -9,7 +10,7 @@ const CountryPageInfo = () => {
 
   const { countryName } = useParams();
 
-  const borders = country.map((country) => country.borders);
+  // const borders = country.map((country) => country.borders);
 
   useEffect(() => {
     const getCountryByName = async () => {
@@ -34,7 +35,15 @@ const CountryPageInfo = () => {
   return (
     <div className="countryPageWrapper">
       <button>
-        <Link to="/">Back</Link>
+        <Link to="/">
+          <span>
+            <KeyboardBackspaceIcon
+              sx={{
+                color: "0000",
+                fontSize: 15,
+              }} />
+          </span>
+          Back</Link>
       </button>
 
       {isLoading && !error && <h4>Loading........</h4>}
