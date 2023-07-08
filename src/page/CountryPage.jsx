@@ -10,7 +10,8 @@ const CountryPageInfo = () => {
 
   const { countryName } = useParams();
 
-  // const borders = country.map((country) => country.borders);
+  // const borders = country.map((country) => country.borders); 
+
 
   useEffect(() => {
     const getCountryByName = async () => {
@@ -62,7 +63,12 @@ const CountryPageInfo = () => {
                 <div className="countryData">
                     <div>
                         <h6>
-                            Native Name: <span>{country.name.nativeName.common}</span>
+                            Native Name: {' '}
+                            {Object.keys(country.name.nativeName).map((val, index) => {
+                                if (index === 0) {
+                                    return <span key={index}>{country.name.nativeName[val].common}</span>
+                                }
+                            })}                              
                         </h6>
                         <h6>
                             Population:{" "}
@@ -77,22 +83,45 @@ const CountryPageInfo = () => {
                             Sub Region: <span>{country.subregion}</span>
                         </h6>
                         <h6>
-                            Capital: <span>{country.capital}</span>
+                            Capital: <span>{country.capital[0]}</span>
                         </h6>
                     </div>
 
                     <div>
                         <h6>
-                            Top Level Domain: <span>{country.tld}</span>
+                            Top Level Domain: <span>{country.tld[0]}</span>
 
                         </h6>
-                        {/* <h6>Currencies: <span>{country.currencies.name}</span></h6> */}
-                        {/* <h6>Languages: <span>{country.languages}</span></h6> */}
+                        <h6>Currencies: {' '}
+                          <span>
+                            {Object.keys(country.currencies).map((val, index, arr) => {
+                              if (index < 2) {
+                                if (index !== arr.length - 1) {
+                                    return <span key={index}>{`${country.currencies[val].name}, `}</span>
+                                } else {
+                                    return <span key={index}>{`${country.currencies[val].name}`}</span>
+                                }
+                              }
+                            })}
+                          </span>
+                        </h6>
+                        <h6>Languages:{" "} 
+                          <span>
+                            {Object.keys(country.languages).map((val, index, arr) => {
+                              if (index < 3) {
+                                  if (index !== arr.length - 1 && index < 2) {
+                                      return <span key={index}>{`${country.languages[val]}, `}</span>
+                                  } else {
+                                      return <span key={index}>{`${country.languages[val]}`}</span>
+                                  }
+                              }
+                            })}
+                            </span></h6>
                     </div>
                 </div>
             
                 <div>
-                    Border Countries:
+                    Border Countries: {' '}
                 </div>
             </div>
         </div>
