@@ -43,7 +43,8 @@ const CountryPageInfo = () => {
                 mr: 1,
               }} />
           </span>
-          Back</Link>
+            Back
+          </Link>
       </button>
 
       {isLoading && !error && <h4>Loading........</h4>}

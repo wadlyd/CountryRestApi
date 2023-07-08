@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import Box from '@mui/material/Box';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 
 const HeaderComponent = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
 
   const handleDarkMode = () => {
-    isDarkMode === "dark-theme" ? setIsDarkMode("light-theme") : setIsDarkMode("dark-theme");
+    isDarkMode !== "dark-theme" ? setIsDarkMode("dark-theme") : setIsDarkMode("light-theme");
   }
   
   useEffect(() => {
@@ -21,7 +20,7 @@ const HeaderComponent = () => {
             </h3>
           </div>
           <div> 
-            <button onClick={() => handleDarkMode()} color="inherit">
+            <button onClick={() => handleDarkMode()} >
               {isDarkMode === "dark-theme"?
                 <>
                   <span>
