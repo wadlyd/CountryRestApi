@@ -34,13 +34,13 @@ const CountryPageInfo = () => {
 
   return (
     <div className="countryPageWrapper">
-      <button>
+      <button id="backButton">
         <Link to="/">
           <span>
             <KeyboardBackspaceIcon
               sx={{
-                color: "0000",
                 fontSize: 15,
+                mr: 1,
               }} />
           </span>
           Back</Link>

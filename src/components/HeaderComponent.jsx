@@ -27,7 +27,6 @@ const HeaderComponent = () => {
                   <span>
                     <DarkModeIcon
                       sx={{
-                        color: "hsl(0, 0%, 100%)",
                         fontSize: 15,
                         mr: 1,
                         }} 
