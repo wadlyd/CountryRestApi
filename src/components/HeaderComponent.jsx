@@ -29,7 +29,7 @@ const HeaderComponent = () => {
                       sx={{
                         fontSize: 15,
                         mr: 1,
-                        }} 
+                      }} 
                     />
                   </span>
                     <p>Dark Mode</p>

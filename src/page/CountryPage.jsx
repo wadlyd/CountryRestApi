@@ -35,16 +35,26 @@ const CountryPageInfo = () => {
 
   return (
     <div className="countryPageWrapper">
-      <button id="backButton">
+      <button>
         <Link to="/">
-          <span>
-            <KeyboardBackspaceIcon
-              sx={{
-                fontSize: 15,
-                mr: 1,
-              }} />
-          </span>
+          <div 
+            style={{ 
+              display: "flex", 
+              padding: "0 15px",
+              alignItems: "center", 
+              background: 'var(--header-input-bcg-color)', borderRadius: '5px' 
+            }}
+          >
+            <span>
+              <KeyboardBackspaceIcon
+                sx={{
+                  fontSize: 18,
+                  mr: 1,
+                  // ml: 5,
+                }} />
+            </span>
             Back
+          </div>
           </Link>
       </button>
 
@@ -64,11 +74,20 @@ const CountryPageInfo = () => {
                     <div>
                         <h6>
                             Native Name: {' '}
-                            {Object.keys(country.name.nativeName).map((val, index) => {
+                            {/* {Object.keys(country.name.nativeName).map((val, index) => {
                                 if (index === 0) {
                                     return <span key={index}>{country.name.nativeName[val].common}</span>
                                 }
-                            })}                              
+                                return false
+                            })} */}
+
+                            {/* {country.name.nativeName ? (
+                              Object.keys(country.name.nativeName).map((val, index) => (
+                                <span key={index}>{country.name.nativeName[val].common}</span>
+                              ))
+                            ) : (
+                              <span>Native name not available</span>
+                            )} */}
                         </h6>
                         <h6>
                             Population:{" "}
@@ -101,7 +120,7 @@ const CountryPageInfo = () => {
                                 } else {
                                     return <span key={index}>{`${country.currencies[val].name}`}</span>
                                 }
-                              }
+                              } return false
                             })}
                           </span>
                         </h6>
@@ -109,12 +128,12 @@ const CountryPageInfo = () => {
                           <span>
                             {Object.keys(country.languages).map((val, index, arr) => {
                               if (index < 3) {
-                                  if (index !== arr.length - 1 && index < 2) {
-                                      return <span key={index}>{`${country.languages[val]}, `}</span>
-                                  } else {
-                                      return <span key={index}>{`${country.languages[val]}`}</span>
-                                  }
-                              }
+                                if (index !== arr.length - 1 && index < 2) {
+                                    return <span key={index}>{`${country.languages[val]}, `}</span>
+                                } else {
+                                    return <span key={index}>{`${country.languages[val]}`}</span>
+                                }
+                              } return false
                             })}
                             </span></h6>
                     </div>

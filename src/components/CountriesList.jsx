@@ -34,7 +34,7 @@ const CountriesList = () => {
     try {
       const response = await fetch(`${apiURL}/name/${countryName}`);
 
-      if (!response.ok) throw new Error("Anything!");
+      // if (!response.ok) throw new Error("Anything!");
 
       const data = await response.json();
       setCountries(data);
