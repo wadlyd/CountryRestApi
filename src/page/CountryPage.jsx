@@ -2,16 +2,19 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { apiURL } from "../services/api";
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import { Box } from "@mui/material";
+import { useMediaQuery } from '@mui/material';
+
 
 const CountryPageInfo = () => {
+  const isSmallScreen = useMediaQuery('(max-width: 550px)');
+
+
   const [country, setCountry] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
 
   const { countryName } = useParams();
-
-  // const borders = country.map((country) => country.borders); 
-
 
   useEffect(() => {
     const getCountryByName = async () => {
@@ -50,7 +53,6 @@ const CountryPageInfo = () => {
                 sx={{
                   fontSize: 18,
                   mr: 1,
-                  // ml: 5,
                 }} />
             </span>
             Back
@@ -73,24 +75,13 @@ const CountryPageInfo = () => {
                 <div className="countryData">
                     <div>
                         <h6>
-                            Native Name: {' '}
-                            {/* {Object.keys(country.name.nativeName).map((val, index) => {
-                                if (index === 0) {
-                                    return <span key={index}>{country.name.nativeName[val].common}</span>
-                                }
-                                return false
-                            })} */}
-
-                            {/* {country.name.nativeName ? (
-                              Object.keys(country.name.nativeName).map((val, index) => (
-                                <span key={index}>{country.name.nativeName[val].common}</span>
-                              ))
-                            ) : (
-                              <span>Native name not available</span>
-                            )} */}
+                            Native Name: &nbsp;
+                            <span>
+                              {country.name?.nativeName[Object.keys(country.languages).at(-1)]?.common}
+                            </span>
                         </h6>
                         <h6>
-                            Population:{" "}
+                            Population:&nbsp;
                             <span>
                                 {new Intl.NumberFormat().format(country.population)}
                             </span>
@@ -102,7 +93,7 @@ const CountryPageInfo = () => {
                             Sub Region: <span>{country.subregion}</span>
                         </h6>
                         <h6>
-                            Capital: <span>{country.capital[0]}</span>
+                            Capital: <span>{ country.capital.length > 0 ? country.capital[0] : 'none' }</span>
                         </h6>
                     </div>
 
@@ -111,37 +102,73 @@ const CountryPageInfo = () => {
                             Top Level Domain: <span>{country.tld[0]}</span>
 
                         </h6>
-                        <h6>Currencies: {' '}
+                        <h6>Currencies:&nbsp;
                           <span>
-                            {Object.keys(country.currencies).map((val, index, arr) => {
-                              if (index < 2) {
-                                if (index !== arr.length - 1) {
-                                    return <span key={index}>{`${country.currencies[val].name}, `}</span>
-                                } else {
-                                    return <span key={index}>{`${country.currencies[val].name}`}</span>
-                                }
-                              } return false
-                            })}
+                          { Object.keys(country.currencies).map((currectyKey) => {
+                                return country.currencies[currectyKey].name
+                            }).join(', ') }
                           </span>
                         </h6>
-                        <h6>Languages:{" "} 
-                          <span>
-                            {Object.keys(country.languages).map((val, index, arr) => {
-                              if (index < 3) {
-                                if (index !== arr.length - 1 && index < 2) {
-                                    return <span key={index}>{`${country.languages[val]}, `}</span>
-                                } else {
-                                    return <span key={index}>{`${country.languages[val]}`}</span>
-                                }
-                              } return false
-                            })}
-                            </span></h6>
+                        <h6>Languages:&nbsp; 
+                          <span>      
+                            { Object.keys(country.languages).map((language) => {
+                                return country.languages[language];
+                                }).join(', ') 
+                            }
+                          </span>
+                        </h6>
                     </div>
                 </div>
             
-                <div>
-                    Border Countries: {' '}
-                </div>
+                <Box
+                  sx={{
+                    display: isSmallScreen ? "block" :'flex',
+                    alignItems: 'center',
+                  }}
+                  >
+                    <h3>Border Countries:</h3>&nbsp;
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        alignItems: isSmallScreen ? 'center' : '',
+                        justifyContent: isSmallScreen ? 'center' : '',
+                        flexWrap: 'wrap',
+                        gap: 2,
+                      }}>
+
+                      {country.borders ?
+                        country.borders.map((border, index) => {
+                          if (index < 3) {
+                            return (
+                              <button>
+                                <Link to={`/country/${country.name.common}`}>
+                                  <div
+                                    style={{
+                                      padding: "0 15px"
+                                    }}
+                                  >
+                                    {border}                                    
+                                  </div>
+                                </Link>
+                              </button>
+                            )
+                          }
+                          return null;
+                        }) :
+                        <button>
+                          <Link to={`/`}>
+                            <div 
+                              style={{
+                                  padding: "0 15px"
+                              }}
+                            >
+                              No data                                    
+                            </div>
+                          </Link>
+                        </button>
+                      }
+                    </Box>
+                </Box>
             </div>
         </div>
       ))}

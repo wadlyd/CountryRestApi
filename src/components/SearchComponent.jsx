@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import SearchIcon from '@mui/icons-material/Search';
-import { IconButton } from "@mui/material";
 
 const SearchInputComponent = ({ onSearch,  }) => {
   const [input, setInput] = useState("");
