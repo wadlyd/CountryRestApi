@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 
 const HeaderComponent = () => {
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState("light-theme");
 
   const handleDarkMode = () => {
     isDarkMode !== "dark-theme" ? setIsDarkMode("dark-theme") : setIsDarkMode("light-theme");
@@ -11,6 +11,7 @@ const HeaderComponent = () => {
   useEffect(() => {
     document.body.className = isDarkMode;
   })
+
   return (
       <header className='header'>
         <div className='header-container'>
