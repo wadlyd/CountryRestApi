@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from "@mui/icons-material/Search";
 
-const SearchInputComponent = ({ onSearch,  }) => {
+const SearchInputComponent = ({ onSearch }) => {
   const [input, setInput] = useState("");
 
   const submitHandler = (e) => {
@@ -12,18 +12,20 @@ const SearchInputComponent = ({ onSearch,  }) => {
 
   return (
     <form onSubmit={submitHandler}>
-      <div 
-        style={{ 
-          display: "flex", 
-          alignItems: "center", 
-          background: 'var(--header-input-bcg-color)', borderRadius: '5px' 
-        }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          background: "var(--header-input-bcg-color)",
+          borderRadius: "5px",
+        }}
+      >
         <span>
           <SearchIcon
             sx={{
               fontSize: 20,
               ml: 3,
-            }} 
+            }}
           />
         </span>
         <input
